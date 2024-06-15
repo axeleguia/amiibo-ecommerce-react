@@ -1,27 +1,31 @@
 import { useEffect, useState } from "react";
-import { Hero } from "./../components/ui/Hero/Hero";
-import { CardProduct } from "@/components/ui/CardProduct/CardProduct";
+import { BannerHero } from "../components/ui/BannerHero/BannerHero";
+import { CardProduct } from "../components/ui/CardProduct/CardProduct";
+import { getProducts } from "../services/product.service";
+import { IProduct } from "../interface";
 
 export const Home = () => {
-  const [products, setProducts] = useState([]);
-  const getProducts = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/products");
-      const data = await response.json();
-      setProducts(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getProducts();
+    getProducts().then((data) => {
+      setProducts(data)
+    }).catch(() => {
+      setError(true)
+    }).finally(() => {
+      setIsLoading(false)
+    })
   }, []);
 
   return (
     <>
-      <Hero />
-      <div className="grid grid-cols-5 gap-x-6 gap-y-4">
+      <BannerHero />
+      {isLoading && <p>Cargando...</p>}
+      {error && <p>Algo salio mal</p>}
+      <div className="grid grid-cols-2 gap-x-8 gap-y-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
         {products.map((product) => (
           <CardProduct key={product.tail} product={product} />
         ))}

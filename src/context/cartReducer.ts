@@ -1,8 +1,19 @@
-export const initialState = {
+import { ICartItem } from "../interface";
+
+export interface ICartState {
+  cartItems: ICartItem[];
+}
+
+export const initialState: ICartState = {
   cartItems: [],
 };
 
-export const cartReducer = (state, action) => {
+export interface ICartAction {
+  type: "ADD_TO_CART" | "REMOVE_FROM_CART",
+  payload: ICartItem
+}
+
+export const cartReducer = (state: ICartState, action: ICartAction): ICartState => {
   switch (action.type) {
     case "ADD_TO_CART": {
       const { id } = action.payload;
@@ -28,20 +39,22 @@ export const cartReducer = (state, action) => {
       const itemToRemove = state.cartItems.find(
         (item) => item.id === removeItemId
       );
-      if (itemToRemove.quantity === 1) {
-        return {
-          ...state,
-          cartItems: state.cartItems.filter((item) => item.id !== removeItemId),
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((item) =>
-            item.id !== removeItemId
-              ? { ...itemToRemove, quantity: itemToRemove.quantity - 1 }
-              : item
-          ),
-        };
+      if (itemToRemove) {
+        if (itemToRemove.quantity === 1) {
+          return {
+            ...state,
+            cartItems: state.cartItems.filter((item) => item.id !== removeItemId),
+          };
+        } else {
+          return {
+            ...state,
+            cartItems: state.cartItems.map((item) =>
+              item.id !== removeItemId
+                ? { ...itemToRemove, quantity: itemToRemove.quantity - 1 }
+                : item
+            ),
+          };
+        }
       }
     }
     default:

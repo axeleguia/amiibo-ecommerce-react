@@ -1,3 +1,9 @@
-import { createContext } from "react";
+import { Dispatch, createContext } from "react";
+import { ICartAction, ICartState } from "./cartReducer";
 
-export const CartContext = createContext();
+interface CartContextType {
+    state: ICartState;
+    dispatch: Dispatch<ICartAction>;
+}
+
+export const CartContext = createContext({} as CartContextType);
