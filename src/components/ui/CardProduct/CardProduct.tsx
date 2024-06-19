@@ -1,6 +1,6 @@
+import useCartContext from "@/hooks/useCartContext";
+import { ICartItem, IProduct } from "@/interface";
 import { FC } from "react";
-import useCartContext from "../../../hooks/useCartContext";
-import { ICartItem, IProduct } from "../../../interface";
 import { toast } from "sonner";
 
 interface CartProductProps {
@@ -40,8 +40,10 @@ export const CardProduct: FC<CartProductProps> = ({ product }) => {
         </p>
         <div className="p-4">
           <button
-            className={`w-full bg-red-600 text-white p-4 rounded-full font-bold invisible group-hover/card:visible`}
+            type="submit"
+            id="add-to-cart-cta"
             onClick={() => handleAddToCart(item)}
+            className="bg-red-600 text-white p-4 rounded-full w-full invisible group-hover/card:visible"
           >
             Agregar al Carro
           </button>

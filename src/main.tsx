@@ -1,11 +1,14 @@
+import { LayoutMain } from "@/components/layout/LayoutMain";
+import { CartProvider } from "@/context/CartProvider";
+import { Cart } from "@/pages/Cart";
+import { Home } from "@/pages/Home";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { LayoutMain } from "./components/layout/LayoutMain";
-import { CartProvider } from "./context/CartProvider";
 import "./index.css";
-import { Cart } from "./pages/Cart";
-import { Home } from "./pages/Home";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -20,8 +23,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );

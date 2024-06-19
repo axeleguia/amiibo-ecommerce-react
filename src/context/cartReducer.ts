@@ -1,4 +1,4 @@
-import { ICartItem } from "../interface";
+import { ICartItem } from "@/interface";
 
 export interface ICartState {
   cartItems: ICartItem[];
@@ -76,6 +76,7 @@ export const cartReducer = (
       return {
         ...state,
         cartItems: [],
+        quantity: 0,
       };
     }
     default:

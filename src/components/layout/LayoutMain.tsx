@@ -6,11 +6,11 @@ import { Toaster } from "sonner";
 export const LayoutMain: FC = () => {
   return (
     <>
-      <div className="bg-gray-100">
+      <div className="min-h-screen bg-gray-100">
         <NavBar />
-        <div className="h-screen mx-auto p-8 pt-28">
+        <main className="pt-24 px-4">
           <Outlet />
-        </div>
+        </main>
       </div>
       <Toaster expand={false} richColors />
     </>

@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { CartSummary } from "../components/ui/CartSummary/CartSummary";
-import { CartItemList } from "../components/ui/CartItemList/CartItemList";
-import { CardCredit } from "../components/ui/CardCredit/CardCredit";
-import useCartContext from "../hooks/useCartContext";
 import { Link } from "react-router-dom";
+import { CardCredit } from "@/components/ui/CardCredit/CardCredit";
+import { CartItemList } from "@/components/ui/CartItemList/CartItemList";
+import { CartSummary } from "@/components/ui/CartSummary/CartSummary";
+import useCartContext from "@/hooks/useCartContext";
 
 export const Cart: FC = () => {
   const {
@@ -13,11 +13,11 @@ export const Cart: FC = () => {
   return (
     <>
       {quantity > 0 ? (
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col md:gap-4 md:flex-row">
           <div className="grow">
             <CartItemList />
           </div>
-          <div>
+          <div className="md:flex md:flex-col">
             <CartSummary />
             <CardCredit />
           </div>

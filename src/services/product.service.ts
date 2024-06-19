@@ -1,8 +1,13 @@
-import { IProduct } from "../interface";
+import { IProduct } from "@/interface";
 
-export const getProducts = async (): Promise<IProduct[]> => {
+export const getProducts = async (
+  page = 0,
+  limit = 10,
+): Promise<IProduct[]> => {
   try {
-    const response = await fetch("http://localhost:3000/products");
+    const response = await fetch(
+      `http://localhost:3000/products?_page=${page}&_limit=${limit}`,
+    );
     const data = await response.json();
     if (response.ok) {
       return data;

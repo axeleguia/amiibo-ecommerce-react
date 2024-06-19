@@ -1,5 +1,4 @@
-import useCartContext from "../../../hooks/useCartContext";
-import "./CartSummary.css";
+import useCartContext from "@/hooks/useCartContext";
 
 export const CartSummary = () => {
   const {
@@ -13,7 +12,7 @@ export const CartSummary = () => {
     ) / 100;
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-xl h-fit mb-4">
+    <div className="bg-white p-4 border border-gray-300 rounded-xl shadow-xl h-fit mb-4">
       <h3 className="text-xl font-bold mb-3">RESUMEN DE LA ORDEN</h3>
       <div className="font-semibold text-xl flex">
         <p className="grow">Total</p>
